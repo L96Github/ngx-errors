@@ -6,7 +6,7 @@ import { Subscription } from 'rxjs/Subscription';
 import 'rxjs/add/operator/filter';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/distinctUntilChanged';
-import 'rxjs/add/observable/combineLatest';
+import { combineLatest } from 'rxjs';
 
 import { NgxErrorsDirective } from './ngxerrors.directive';
 
@@ -56,8 +56,8 @@ export class NgxErrorDirective implements OnInit, OnDestroy, DoCheck {
     const states = this.states
       .map(states => this.rules.every(rule => !!~states.indexOf(rule)));
 
-    this.subscription = Observable.combineLatest(states, errors)
-      .subscribe(([states, errors]) => {
+    this.subscription = combineLatest(states, errors)
+      .map(([states, errors]) => {
         this.hidden = !(states && errors.control.hasError(errors.errorName));
       });
 
