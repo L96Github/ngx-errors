@@ -25,7 +25,8 @@ yarn-error.log
 npm-debug.log
 
 # Build
-dist
+#dist
 
 # Docs
 gh-pages
+
